@@ -576,49 +576,30 @@ class ToysCagesScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Toys for Enrichment',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 12),
-              ..._getToys().map((toy) => Card(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(toy['name'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      const SizedBox(height: 4),
-                      Text(toy['desc'] ?? '', style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                      const SizedBox(height: 8),
-                      Text('Benefits: ${toy['benefits'] ?? ''}', style: const TextStyle(fontSize: 12)),
-                    ],
-                  ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12.0),
+                child: Text(
+                  'Toys for Enrichment',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              )),
+              ),
+              _toyCard('Chew Toys', 'Wooden or natural materials', 'Satisfies natural chewing behavior'),
+              _toyCard('Swings', 'Hanging perches and swings', 'Exercise and play'),
+              _toyCard('Bells', 'Bell toys with different sounds', 'Mental stimulation and sound enrichment'),
+              _toyCard('Foraging Toys', 'Toys that hide treats', 'Mimics natural foraging behavior'),
+              _toyCard('Mirrors', 'Safe bird mirrors', 'Visual enrichment (limit use)'),
               const SizedBox(height: 20),
-              const Text(
-                'Cage Sizes',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 12),
-              ..._getCages().map((cage) => Card(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(cage['size'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      const SizedBox(height: 4),
-                      Text(cage['desc'] ?? '', style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                      const SizedBox(height: 8),
-                      Text('Requirements: ${cage['req'] ?? ''}', style: const TextStyle(fontSize: 12)),
-                    ],
-                  ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12.0),
+                child: Text(
+                  'Cage Sizes',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              )),
+              ),
+              _cageCard('Small (Budgies)', 'Minimum 18x18x24 inches', 'Perches, toys, water/food bowls'),
+              _cageCard('Medium (Cockatiels)', 'Minimum 24x24x36 inches', 'Multiple perches, toys, ventilation'),
+              _cageCard('Large (Macaws)', 'Minimum 36x48x48 inches or larger', 'Multiple perches, toys, space to fly'),
+              _cageCard('Extra Large (Multiple birds)', '48+ inches, multiple compartments', 'Separated areas, multiple feeding stations'),
             ],
           ),
         ),
@@ -626,22 +607,54 @@ class ToysCagesScreen extends StatelessWidget {
     );
   }
 
-  List<Map<String, String>> _getToys() {
-    return [
-      {'name': 'Chew Toys', 'desc': 'Wooden or natural materials', 'benefits': 'Satisfies natural chewing behavior'},
-      {'name': 'Swings', 'desc': 'Hanging perches and swings', 'benefits': 'Exercise and play'},
-      {'name': 'Bells', 'desc': 'Bell toys with different sounds', 'benefits': 'Mental stimulation and sound enrichment'},
-      {'name': 'Foraging Toys', 'desc': 'Toys that hide treats', 'benefits': 'Mimics natural foraging behavior'},
-      {'name': 'Mirrors', 'desc': 'Safe bird mirrors', 'benefits': 'Visual enrichment (limit use)'},
-    ];
+  Widget _toyCard(String name, String desc, String benefits) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              desc,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Benefits: $benefits',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  List<Map<String, String>> _getCages() {
-    return [
-      {'size': 'Small (Budgies)', 'desc': 'Minimum 18x18x24 inches', 'req': 'Perches, toys, water/food bowls'},
-      {'size': 'Medium (Cockatiels)', 'desc': 'Minimum 24x24x36 inches', 'req': 'Multiple perches, toys, ventilation'},
-      {'size': 'Large (Macaws)', 'desc': 'Minimum 36x48x48 inches or larger', 'req': 'Multiple perches, toys, space to fly'},
-      {'size': 'Extra Large (Multiple birds)', 'desc': '48+ inches, multiple compartments', 'req': 'Separated areas, multiple feeding stations'},
-    ];
-  }
-}
+  Widget _cageCard(String size, String desc, String req) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              size,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              desc,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Requirements: $req',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
